@@ -24,7 +24,6 @@ class Books extends Component {
   }
 
   handleAddToCar(currentBook) {
-    this.getTotal();
     let number = 1;
     let exist = false;
     if (this.state.car) {
@@ -40,7 +39,7 @@ class Books extends Component {
     if (!exist) {
       let selectedBook = Object.assign({}, currentBook, {number});
       this.setState({
-          car: this.state.car.concat(selectedBook)
+          car: this.state.car.concat(selectedBook),
       });
     }
   }
@@ -49,7 +48,7 @@ class Books extends Component {
     let car = this.state.car;
     let total = 0;
     if (car.length) {
-      total = car.map(book => (book.price * book.number)).reduce((prev, cur) => (prev + cur));
+      total = car.map(book => (book.price * book.number)).reduce((prev, cur) => prev + cur);
       this.setState({total});
     }
   }
@@ -58,8 +57,8 @@ class Books extends Component {
     return (
       <div className='row'>
         <BookList books={this.props.books} listClick={this.handleListClick}/>
-        <BookDetail currentBook={this.state.currentBook} addToCar={this.handleAddToCar} />
-        <Car {...this.state} />
+        <BookDetail currentBook={this.state.currentBook} addToCar={this.handleAddToCar}/>
+        <Car {...this.state} getTotal={this.getTotal} />
       </div>
     );
   }
