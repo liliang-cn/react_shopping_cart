@@ -1,14 +1,7 @@
 import React from 'react';
 
-const Car = ({car, total, getTotal}) => {
-  let result = car.length ? 
-  <p>
-    <button onClick={() => getTotal()}>结算</button>
-    <br/>
-    <span>共{total}</span> 
-  </p>
-  : 
-  <p>购物车为空</p>;
+const Car = ({car, totalNum, total}) => {
+  let result = car.length ? <p>共{totalNum}本 总价为{total}</p>: <p>购物车为空</p>;
   return (
     <div className='col-md-6'>
       <h2>购物车</h2>

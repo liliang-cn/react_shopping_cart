@@ -9,10 +9,11 @@ class Books extends Component {
     super()
     this.handleListClick = this.handleListClick.bind(this);
     this.handleAddToCar = this.handleAddToCar.bind(this);
-    this.getTotal = this.getTotal.bind(this);
+
     this.state = {
       currentBook: null,
       car: [],
+      totalNum: 0,
       total: 0
     };
   }
@@ -24,33 +25,38 @@ class Books extends Component {
   }
 
   handleAddToCar(currentBook) {
-    let number = 1;
+    let totalNum = this.state.totalNum;
+    let car = this.state.car;
+    let total = this.state.total;
+
     let exist = false;
-    if (this.state.car) {
-      this.state.car.forEach(book => {
+
+    if (car.length) {
+      car.forEach(book => {
         if (book.id === currentBook.id) {
           book.number += 1;
+          totalNum += 1;
           exist = true;
-          this.setState({});
+          this.setState({
+            totalNum
+          });
         }
       });
     }
-    
+
     if (!exist) {
-      let selectedBook = Object.assign({}, currentBook, {number});
+      car = car.concat(Object.assign({}, currentBook, {number:1}));
+      totalNum += 1;
       this.setState({
-          car: this.state.car.concat(selectedBook),
+          car,
+          totalNum
       });
     }
-  }
 
-  getTotal() {
-    let car = this.state.car;
-    let total = 0;
-    if (car.length) {
-      total = car.map(book => (book.price * book.number)).reduce((prev, cur) => prev + cur);
-      this.setState({total});
-    }
+    total = car.map(book => (book.price * book.number)).reduce((prev, cur) => prev + cur);
+    this.setState({
+      total
+    });
   }
 
   render() {
@@ -58,7 +64,7 @@ class Books extends Component {
       <div className='row'>
         <BookList books={this.props.books} listClick={this.handleListClick}/>
         <BookDetail currentBook={this.state.currentBook} addToCar={this.handleAddToCar}/>
-        <Car {...this.state} getTotal={this.getTotal} />
+        <Car {...this.state} />
       </div>
     );
   }
