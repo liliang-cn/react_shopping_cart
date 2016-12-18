@@ -1,5 +1,18 @@
 import _ from 'lodash';
-import { ADD_TO_CART } from '../constants';
+import { ADD_TO_CART, DELETE_FROM_CART } from '../constants';
+
+const deleteBook = (arr, obj) => {
+    let deleteIndex = null;
+    for(let i=0;i<arr.length;i++) {
+        if (arr[i].id === obj.id) {
+            deleteIndex = i;
+        }
+    }
+    return [
+        ...arr.slice(0, deleteIndex),
+        ...arr.slice(deleteIndex+1)
+    ]
+};
 
 const cart = (state=[], action) => {
     switch (action.type) {
@@ -20,6 +33,8 @@ const cart = (state=[], action) => {
                         number: 1
                     })
                 ]
+        case DELETE_FROM_CART:
+            return deleteBook(state, action.book)
         default:
             return state;
     }

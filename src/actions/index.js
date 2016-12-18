@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DELETE_FROM_CART,  SELECT_BOOK , SELECT_INDEX} from '../constants';
+import { ADD_TO_CART, DELETE_FROM_CART, SELECT_BOOK , SELECT_INDEX} from '../constants';
 
 export const showDetail = (book) => ({
     type: SELECT_BOOK,

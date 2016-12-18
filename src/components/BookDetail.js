@@ -16,13 +16,11 @@ const Bookdetail = ({currentBook, onAddToCart}) => (
         <p>编号:{currentBook.id}</p>
       </CardText>
       <CardActions>
-        <FlatButton label="放进购物车" onTouchTap={() => onAddToCart(currentBook)}/>
+        <FlatButton label="添加到购物车" onTouchTap={() => onAddToCart(currentBook)}/>
       </CardActions>
     </Card>
   :
-  <div>
-    <Subheader>请选择图书</Subheader>
-  </div>
+  null
 );
 
 export default Bookdetail;

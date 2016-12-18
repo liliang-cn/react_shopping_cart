@@ -1,7 +1,8 @@
 {
-  "name": "shop_car_react",
+  "name": "react_shopping_cart",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://liliang-cn.github.io/react_shopping_cart",
   "devDependencies": {
     "react-scripts": "0.7.0"
   },

@@ -5,7 +5,7 @@ import BookList from '../components/BookList';
 import BookDetail from '../components/BookDetail';
 import Cart from '../components/Cart';
 
-import { showDetail, addToCart, selectIndex } from '../actions';
+import { showDetail, addToCart, selectIndex, deleteFromCart } from '../actions';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -36,7 +36,7 @@ const BooksCart = ({dispatch, books, currentBook, cart, total, selectedIndex}) =
                 )
             case 2: 
                 return (
-                    <Cart cart={cart} total={total}/>
+                    <Cart cart={cart} total={total} onDelete={book => dispatch(deleteFromCart(book))} />
                 )
             case 0:
             default:
@@ -54,9 +54,9 @@ const BooksCart = ({dispatch, books, currentBook, cart, total, selectedIndex}) =
                 <AppBar showMenuIconButton={false} title='React Shopping Cart' />
                 <Paper style={paperStyle} zDepth={5}>
                     <BottomNavigation selectedIndex={selectedIndex}>
-                        <BottomNavigationItem label="All Books" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(0))}/> 
-                        <BottomNavigationItem label="Current Book" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(1))}/>
-                        <BottomNavigationItem label="Cart" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(2))}/>  
+                        <BottomNavigationItem label="所有图书" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(0))}/> 
+                        <BottomNavigationItem label="详情" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(1))}/>
+                        <BottomNavigationItem label="购物车" icon={nearbyIcon} onTouchTap={() => dispatch(selectIndex(2))}/>  
                     </BottomNavigation>
                     {renderComponent(selectedIndex)}
                 </Paper>
